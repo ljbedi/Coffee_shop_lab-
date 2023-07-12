@@ -8,7 +8,7 @@ class TestCoffeeShop(unittest.TestCase):
     def setUp(self):
         self.coffee = Drink("Black coffee", 3.95) 
         self.tea = Drink("Earl Grey", 2.00) 
-        self.customer = Customer("Beyonce", 2000000)
+        self.customer = Customer("Eilein", 2000000, 21)
 
         self.coffee_shop = CoffeeShop("The Prancing Pony", 100, [self.coffee, self.tea])
     
@@ -37,9 +37,13 @@ class TestCoffeeShop(unittest.TestCase):
         self.coffee_shop.till += self.coffee.price
         self.assertEqual(103.95, self.coffee_shop.till)
 
-    
+    def test_check_age(self):
+        if self.customer.age >= 16:
+            self.coffee_shop.till += self.coffee.price
+            self.assertEqual(103.95, self.coffee_shop.till)
+        else:
+            self.assertEqual(100, self.coffee_shop.till)
 
     
 
-# A CoffeeShop should be able to sell a drink to a customer and increase it's till by the price of Drink.
-# Hint: Use a Customer method you already have.
+    
