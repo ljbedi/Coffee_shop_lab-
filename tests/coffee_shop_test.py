@@ -1,12 +1,14 @@
 import unittest
 from src.coffee_shop import CoffeeShop
 from src.drink import Drink
+from src.customer import Customer 
 
 class TestCoffeeShop(unittest.TestCase):
 
     def setUp(self):
         self.coffee = Drink("Black coffee", 3.95) 
         self.tea = Drink("Earl Grey", 2.00) 
+        self.customer = Customer("Beyonce", 2000000)
 
         self.coffee_shop = CoffeeShop("The Prancing Pony", 100, [self.coffee, self.tea])
     
@@ -30,6 +32,10 @@ class TestCoffeeShop(unittest.TestCase):
     def test_decrease_till(self):
         self.coffee_shop.change_till_by_amount(-10)
         self.assertEqual(90, self.coffee_shop.till)
+
+    def test_sell_drink(self):
+        self.coffee_shop.till += self.coffee.price
+        self.assertEqual(103.95, self.coffee_shop.till)
 
     
 
