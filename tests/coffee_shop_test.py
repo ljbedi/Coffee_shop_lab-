@@ -6,9 +6,9 @@ from src.customer import Customer
 class TestCoffeeShop(unittest.TestCase):
 
     def setUp(self):
-        self.coffee = Drink("Black coffee", 3.95) 
-        self.tea = Drink("Earl Grey", 2.00) 
-        self.customer = Customer("Eilein", 2000000, 21)
+        self.coffee = Drink("Black coffee", 3.95, 50) 
+        self.tea = Drink("Earl Grey", 2.00, 45) 
+        self.customer = Customer("Eilein", 50, 21, 100)
 
         self.coffee_shop = CoffeeShop("The Prancing Pony", 100, [self.coffee, self.tea])
     
@@ -34,8 +34,13 @@ class TestCoffeeShop(unittest.TestCase):
         self.assertEqual(90, self.coffee_shop.till)
 
     def test_sell_drink(self):
-        self.coffee_shop.till += self.coffee.price
+        self.coffee_shop.sell_drink(self.coffee, self.customer)
         self.assertEqual(103.95, self.coffee_shop.till)
+        self.assertEqual(46.05, self.customer.wallet)
+
+
+        # self.coffee_shop.till += self.coffee.price
+        # self.assertEqual(103.95, self.coffee_shop.till)
 
     def test_check_age(self):
         if self.customer.age >= 16:

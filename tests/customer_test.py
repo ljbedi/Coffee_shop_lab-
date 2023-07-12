@@ -7,8 +7,9 @@ from src.drink import Drink
 class TestCustomer (unittest.TestCase):
 
     def setUp(self):
-        self.customer = Customer("Sky", 50, 17)
-        self.water = Drink("Spring Water", 10)
+        self.customer = Customer("Sky", 500, 32, 10)
+        self.water = Drink("Spring Water", 10, 20)
+        self.coffee = Drink("Double Espresso", 5, 30)
 
     def test_has_a_name(self):
         expected = "Sky"
@@ -17,4 +18,9 @@ class TestCustomer (unittest.TestCase):
 
     def test_customer_can_buy_drink(self):
         self.customer.buy_drink(self.water)
-        self.assertEqual(40, self.customer.wallet)
+        self.assertEqual(490, self.customer.wallet)
+
+    def bought_drink_energy_up(self):
+        self.customer.buy_drink(self.coffee)
+        self.assertEqual(40, self.customer.energy)
+
